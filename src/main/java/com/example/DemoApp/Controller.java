@@ -1,5 +1,6 @@
 package com.example.DemoApp;
 
+import com.example.DemoApp.exception.EmployeeNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,7 @@ public class Controller {
 
     @GetMapping("/{ID}")
     public Optional<Employee> getByID(@PathVariable int ID){
-        return service.findByID(ID);
+        return Optional.ofNullable(service.findByID(ID)
+                .orElseThrow(() -> new EmployeeNotFoundException("Employee Not Found with ID:" + ID)));
     }
 }
