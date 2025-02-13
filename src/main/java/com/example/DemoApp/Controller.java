@@ -21,8 +21,8 @@ public class Controller {
     }
 
     @GetMapping("/{ID}")
-    public Optional<Employee> getByID(@PathVariable int ID){
-        return Optional.ofNullable(service.findByID(ID)
-                .orElseThrow(() -> new EmployeeNotFoundException("Employee Not Found with ID: " + ID)));
+    public Employee getByID(@PathVariable int ID){
+        return service.findByID(ID)
+                .orElseThrow(() -> new EmployeeNotFoundException("Employee Not Found with ID: " + ID));
     }
 }
